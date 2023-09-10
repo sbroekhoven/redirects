@@ -78,7 +78,14 @@ func Get(redirecturl string, nameserver string) *Data {
 		redirect.StatusCode = resp.StatusCode
 		redirect.URL = resp.Request.URL.String()
 		redirect.Protocol = resp.Proto
-		redirect.TLSVersion = tls.VersionName(resp.TLS.Version)
+
+		if resp.TLS.Version != 0 {
+			redirect.TLSVersion = tls.VersionName(resp.TLS.Version)
+		} else {
+			redirect.TLSVersion = "N/A"
+		}
+
+		// redirect.TLSVersion = tls.VersionName(resp.TLS.Version)
 
 		r.Redirects = append(r.Redirects, redirect)
 
