@@ -20,6 +20,7 @@ type Redirects struct {
 	StatusCode int    `json:"statuscode,omitempty"`
 	URL        string `json:"url,omitempty"`
 	Protocol   string `json:"protocol,omitempty"`
+	TLSVersion uint16 `json:"tlsversion,omitempty"`
 }
 
 // Get function
@@ -76,6 +77,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		redirect.StatusCode = resp.StatusCode
 		redirect.URL = resp.Request.URL.String()
 		redirect.Protocol = resp.Proto
+		redirect.TLSVersion = resp.TLS.Version
 
 		r.Redirects = append(r.Redirects, redirect)
 
