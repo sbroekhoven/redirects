@@ -61,7 +61,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		}
 
 		// Set User-Agent
-		req.Header.Set("User-Agent", "Golang_Research_Bot/3.0")
+		req.Header.Set("User-Agent", "Golang_Research_Bot/1.0")
 
 		// Do the request.
 		resp, err := client.Do(req)
