@@ -61,7 +61,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		}
 
 		// Set User-Agent
-		req.Header.Set("User-Agent", "Golang_Research_Bot/1.0")
+		req.Header.Set("User-Agent", "Golang_Research_Bot/3.0")
 
 		// Do the request.
 		resp, err := client.Do(req)
@@ -79,7 +79,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		redirect.URL = resp.Request.URL.String()
 		redirect.Protocol = resp.Proto
 
-		if resp.TLS.Version != 0 {
+		if caseInsenstiveContains(redirecturl, "https://") {
 			redirect.TLSVersion = tls.VersionName(resp.TLS.Version)
 		} else {
 			redirect.TLSVersion = "N/A"
