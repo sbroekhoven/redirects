@@ -21,7 +21,7 @@ type Redirects struct {
 	StatusCode int    `json:"statuscode,omitempty"`
 	URL        string `json:"url,omitempty"`
 	Protocol   string `json:"protocol,omitempty"`
-	TLSVersion string `json:"tlsversion,omitempty"`
+	TLSVersion string `json:"tlsversion,omitempty"` // Dont know if TLS version stays. Not really relevant.
 }
 
 // Get function
@@ -79,6 +79,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		redirect.URL = resp.Request.URL.String()
 		redirect.Protocol = resp.Proto
 
+		// Dont know if TLS version stays. Not really relevant.
 		if caseInsenstiveContains(redirecturl, "https://") {
 			redirect.TLSVersion = tls.VersionName(resp.TLS.Version)
 		} else {
