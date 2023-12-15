@@ -21,7 +21,7 @@ type Redirects struct {
 	StatusCode int    `json:"statuscode,omitempty"`
 	URL        string `json:"url,omitempty"`
 	Protocol   string `json:"protocol,omitempty"`
-	TLSVersion string `json:"tlsversion,omitempty"` // Dont know if TLS version stays. Not really relevant.
+	TLSVersion string `json:"tlsversion,omitempty"` // Dont know if TLS version stays.
 }
 
 // Get function
