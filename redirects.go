@@ -125,11 +125,14 @@ func Get(redirecturl string, nameserver string) *Data {
 		if resp.StatusCode == 200 || resp.StatusCode > 303 {
 			break
 		} else {
-			// Get the URL from the Location header
-			redirecturl = resp.Header.Get("Location")
-			if redirecturl == "" {
-				// If the Location header is empty, set the Error field to true and
-				// the ErrorMessage field to the error message.
+
+			if len(resp.Header.Get("Location")) > 0 {
+				redirecturl = resp.Header.Get("Location")
+			} else if len(resp.Header.Get("location")) > 0 {
+				redirecturl = resp.Header.Get("location")
+			} else if len(resp.Header.Get("LOCATION")) > 0 {
+				redirecturl = resp.Header.Get("LOCATION")
+			} else {
 				r.Error = true
 				r.ErrorMessage = "Location header is empty"
 				return r
