@@ -97,13 +97,13 @@ func Get(redirecturl string, nameserver string) *Data {
 
 		// Create a new Redirects struct
 		redirect := new(Redirects)
-		if redirect == nil {
-			// If the Redirects struct is nil, set the Error field to true and the
-			// ErrorMessage field to the error message.
-			r.Error = true
-			r.ErrorMessage = "redirect == nil"
-			return r
-		}
+		// if redirect == nil {
+		// 	// If the Redirects struct is nil, set the Error field to true and the
+		// 	// ErrorMessage field to the error message.
+		// 	r.Error = true
+		// 	r.ErrorMessage = "redirect == nil"
+		// 	return r
+		// }
 
 		// Set the fields of the Redirects struct
 		redirect.Number = i
@@ -142,9 +142,6 @@ func Get(redirecturl string, nameserver string) *Data {
 			if !strings.HasPrefix(redirecturl, "http://") && !strings.HasPrefix(redirecturl, "https://") {
 				redirecturl = "http://" + redirecturl
 			}
-
-			// Increment the loop counter
-			i++
 		}
 	}
 
