@@ -97,6 +97,8 @@ func Get(redirecturl string, nameserver string) *Data {
 
 		// Create a new Redirects struct
 		redirect := new(Redirects)
+
+		// TODO: Find out why this is here..
 		// if redirect == nil {
 		// 	// If the Redirects struct is nil, set the Error field to true and the
 		// 	// ErrorMessage field to the error message.
