@@ -1,3 +1,20 @@
+// Package redirects provides functionality to follow HTTP redirects and gather
+// information about the redirects, including the status code, URL, protocol,
+// and TLS version.
+//
+// The package defines two main structs: Data and Redirects. The Data struct
+// holds the initial URL, a slice of Redirects, and error information. The
+// Redirects struct holds information about each individual redirect.
+//
+// The Get function takes a URL and a nameserver as arguments and returns a
+// Data struct with information about the URL and the redirects it goes through.
+// The function follows a maximum of 20 redirects and handles errors by setting
+// the Error field and ErrorMessage field in the Data struct.
+//
+// Helper functions include caseInsenstiveContains for case-insensitive string
+// containment checks, createHTTPClient for creating an HTTP client with a
+// timeout and custom redirect policy, and validateURL for validating the
+// provided URL.
 package redirects
 
 import (
@@ -28,17 +45,17 @@ type Redirects struct {
 
 const maxRedirects = 20
 
-// Get function
-// This function takes a URL and a nameserver as arguments and returns a struct
-// with information about the URL and the redirects it goes through.
-// The function will follow a maximum of 20 redirects.
-// If there is an error when making the request, the function will return an error
-// message.
-// If a redirect goes to an invalid URL, the function will not return an error,
-// but instead will set the Error field of the returned struct to true and the
-// ErrorMessage field to a string with the error message.
-// The TLS version is currently not really relevant, but it is included in the
-// returned struct.
+// Get follows redirects for a given URL up to a maximum number of redirects.
+// It validates the URL, creates an HTTP client, and follows redirects while
+// collecting information about each redirect.
+//
+// Parameters:
+//   - redirecturl: The initial URL to follow redirects from.
+//   - nameserver: The nameserver to use for DNS resolution.
+//
+// Returns:
+//   - *Data: A pointer to a Data struct containing information about the redirects
+//     and any errors that occurred during the process.
 func Get(redirecturl string, nameserver string) *Data {
 
 	r := new(Data)
@@ -55,8 +72,14 @@ func Get(redirecturl string, nameserver string) *Data {
 	// Create a new HTTP client
 	client := createHTTPClient()
 
-	// Loop through up to 20 redirects
-	for i := 0; i < maxRedirects; i++ {
+	// Create a slice of integers from 0 to maxRedirects-1
+	redirectIndices := make([]int, maxRedirects)
+	for i := range redirectIndices {
+		redirectIndices[i] = i
+	}
+
+	// Loop through up to 20 redirects using range
+	for i := range redirectIndices {
 
 		// Set the client to follow redirects, but not to follow the redirect
 		// automatically. Instead, the redirect will be stored in the Location
@@ -127,7 +150,6 @@ func Get(redirecturl string, nameserver string) *Data {
 		if resp.StatusCode == 200 || resp.StatusCode > 303 {
 			break
 		} else {
-
 			if len(resp.Header.Get("Location")) > 0 {
 				redirecturl = resp.Header.Get("Location")
 			} else if len(resp.Header.Get("location")) > 0 {
