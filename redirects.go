@@ -105,7 +105,7 @@ func Get(redirecturl string, nameserver string) *Data {
 		}
 
 		// Set the User-Agent header
-		req.Header.Set("User-Agent", "Mozilla/5.0 (Golang_Research_Bot/3.0)")
+		req.Header.Set("User-Agent", "Mozilla/5.0 (Ghttps://github.com/sbroekhoven/redirects)")
 
 		// Do the request
 		resp, err := client.Do(req)
