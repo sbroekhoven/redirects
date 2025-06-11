@@ -1,20 +1,3 @@
-// Package redirects provides functionality to follow HTTP redirects and gather
-// information about the redirects, including the status code, URL, protocol,
-// and TLS version.
-//
-// The package defines two main structs: Data and Redirects. The Data struct
-// holds the initial URL, a slice of Redirects, and error information. The
-// Redirects struct holds information about each individual redirect.
-//
-// The Get function takes a URL and a nameserver as arguments and returns a
-// Data struct with information about the URL and the redirects it goes through.
-// The function follows a maximum of 20 redirects and handles errors by setting
-// the Error field and ErrorMessage field in the Data struct.
-//
-// Helper functions include caseInsenstiveContains for case-insensitive string
-// containment checks, createHTTPClient for creating an HTTP client with a
-// timeout and custom redirect policy, and validateURL for validating the
-// provided URL.
 package redirects
 
 import (
@@ -51,12 +34,11 @@ const maxRedirects = 20
 //
 // Parameters:
 //   - redirecturl: The initial URL to follow redirects from.
-//   - nameserver: The nameserver to use for DNS resolution.
 //
 // Returns:
 //   - *Data: A pointer to a Data struct containing information about the redirects
 //     and any errors that occurred during the process.
-func Get(redirecturl string, nameserver string) *Data {
+func Get(redirecturl string) *Data {
 
 	r := new(Data)
 

@@ -12,19 +12,18 @@ import (
 func main() {
 	// Define command-line flags
 	urlFlag := flag.String("url", "", "The URL to follow redirects for")
-	nameserverFlag := flag.String("nameserver", "", "The nameserver to use for DNS resolution")
 
 	// Parse command-line flags
 	flag.Parse()
 
 	// Validate the URL flag
 	if *urlFlag == "" {
-		fmt.Println("Usage: redirects -url <URL> [-nameserver <nameserver>]")
+		fmt.Println("Usage: redirects -url <URL>")
 		os.Exit(1)
 	}
 
 	// Call the Get function from the redirects package
-	data := redirects.Get(*urlFlag, *nameserverFlag)
+	data := redirects.Get(*urlFlag)
 
 	// Check for errors
 	if data.Error {
