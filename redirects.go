@@ -28,16 +28,6 @@ type Redirects struct {
 
 const maxRedirects = 20
 
-// Get follows redirects for a given URL up to a maximum number of redirects.
-// It validates the URL, creates an HTTP client, and follows redirects while
-// collecting information about each redirect.
-//
-// Parameters:
-//   - redirecturl: The initial URL to follow redirects from.
-//
-// Returns:
-//   - *Data: A pointer to a Data struct containing information about the redirects
-//     and any errors that occurred during the process.
 func Get(redirecturl string) *Data {
 
 	r := new(Data)
