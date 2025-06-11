@@ -87,7 +87,7 @@ func Get(redirecturl string) *Data {
 		}
 
 		// Set the User-Agent header
-		req.Header.Set("User-Agent", "Mozilla/5.0 (Ghttps://github.com/sbroekhoven/redirects)")
+		req.Header.Set("User-Agent", "Mozilla/5.0 (https://github.com/sbroekhoven/redirects)")
 
 		// Do the request
 		resp, err := client.Do(req)
