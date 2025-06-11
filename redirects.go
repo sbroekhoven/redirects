@@ -121,15 +121,6 @@ func Get(redirecturl string, nameserver string) *Data {
 		// Create a new Redirects struct
 		redirect := new(Redirects)
 
-		// TODO: Find out why this is here..
-		// if redirect == nil {
-		// 	// If the Redirects struct is nil, set the Error field to true and the
-		// 	// ErrorMessage field to the error message.
-		// 	r.Error = true
-		// 	r.ErrorMessage = "redirect == nil"
-		// 	return r
-		// }
-
 		// Set the fields of the Redirects struct
 		redirect.Number = i
 		redirect.StatusCode = resp.StatusCode
