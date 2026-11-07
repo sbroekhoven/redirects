@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/tonesploit/redirects"
+	"github.com/sbroekhoven/redirects"
 )
 
 func main() {
